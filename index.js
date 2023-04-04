@@ -47,6 +47,7 @@ client.on('messageCreate', async (message) => {
   })
 
   const msg = result.data.choices[0].message ? result.data.choices[0].message : '`Error: No response from OpenAI`'
+  if (msg.length > 2000) return message.reply('`Error: Response too long`')
 
   message.reply(msg)
 })
