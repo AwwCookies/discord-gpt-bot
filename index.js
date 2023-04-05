@@ -17,7 +17,7 @@ const client = new Client({
   ]
 })
 
-const channel = client.channels.cache.get(process.env.CHANNEL_ID)
+// const channel = client.channels.get(process.env.CHANNEL_ID)
 
 function resetTimerFunction() {
   resetConversation()
@@ -46,6 +46,10 @@ client.on('messageCreate', async (message) => {
     return message.reply('Conversation reset')
   }
 
+  if (message.content.startsWith('!help')) {
+    return message.reply('Type a message to start a conversation with the bot. Type `!reset` to reset the conversation.')
+  }
+
   // else add message to conversation log
 
   conversationLog.push({ role: 'user', content: message.content })
@@ -53,6 +57,7 @@ client.on('messageCreate', async (message) => {
   clearTimeout(resetTimer)
 
   await message.channel.sendTyping()
+
   const result = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages: conversationLog,

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "./build_and_run.sh",
+    "deploy": "./deploy.sh",
     "logs": "docker logs discord-gpt-bot"
   },
   "author": "",
